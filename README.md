@@ -44,3 +44,16 @@ curl http://localhost:3000/get_maximum/0x1234567890abcdef1234567890abcdef1234567
 Upon changes, this Github repo will automatically be deployed to a DigitalOcean droplet via a Github action.
 The action will SSH into the droplet and run `git pull` to update the code, then restart the server.
 
+## Whitelists
+
+The whitelists are stored in the `whitelists` directory. Each whitelist is a JSON file with the following format:
+```json
+[
+  { "address": "neutron14fmxw54lgvheyn7m0p9efpr82fac68ysph96ch", "amount": "999"},
+  { "address": "neutron1r6rv879netg009eh6ty23v57qrq29afecuehlm", "amount": "991"},
+  ...
+]
+```
+
+The filename should be in the format `{unix_timestamp}_whitelist.json`, where the timestamp is the time the whitelist should go into effect.
+The server will serve the whitelist with the highest timestamp that is less the current time.
