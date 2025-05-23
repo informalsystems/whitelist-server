@@ -44,6 +44,8 @@ curl http://localhost:3000/get_maximum/0x1234567890abcdef1234567890abcdef1234567
 Upon changes, this Github repo will automatically be deployed to a DigitalOcean droplet via a Github action.
 The action will SSH into the droplet and run `git pull` to update the code, then restart the server.
 
+The Droplet details are stored as Github secrets.
+
 ## Whitelists
 
 The whitelists are stored in the `whitelists` directory. Each whitelist is a JSON file with the following format:
