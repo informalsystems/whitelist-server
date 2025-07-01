@@ -6,7 +6,11 @@ const { spawn } = require('child_process');
 
 const app        = express();
 const PORT       = process.env.PORT || 3000;
-const WHITELIST_DIR = path.resolve(process.env.WHITELIST_DIR);
+
+// Get WHITELIST_DIR from command-line arguments or fallback to .env
+const WHITELIST_DIR = path.resolve(
+  process.argv.find(arg => arg.startsWith('--whitelist-dir='))?.split('=')[1] || process.env.WHITELIST_DIR
+);
 
 // Helper: current UNIX time in seconds
 const now = () => Math.floor(Date.now() / 1000);
@@ -113,5 +117,6 @@ app.get('/generate_proof/:address', (req, res) => {
 });
 
 app.listen(PORT, () => {
+  console.log(`Whitelist dir ${WHITELIST_DIR}`)
   console.log(`▶️  Server listening on port ${PORT}`);
 });
