@@ -21,7 +21,8 @@ jobs:
           key: ${{ secrets.DROPLET_SSH_KEY }}
           port: 22
           script: |
-            cd /opt/merkle-airdrop-server
+            cd ~/whitelist-server
+            git reset --hard
             git pull origin main
             yarn install --frozen-lockfile
             pm2 reload merkle-server
